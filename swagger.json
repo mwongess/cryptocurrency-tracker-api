@@ -1,0 +1,298 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Cryptocurrency Tracker API",
+    "description": "API documentation for the cryptocurrency tracker, including portfolio management and real-time cryptocurrency data."
+  },
+  "host": "localhost:3000",
+  "basePath": "/api",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/cryptocurrencies": {
+      "get": {
+        "summary": "Fetch and store cryptocurrency prices",
+        "description": "Fetches the latest cryptocurrency prices and stores them in the database. Returns the top 10 cryptocurrencies sorted by market cap.",
+        "responses": {
+          "200": {
+            "description": "Top 10 cryptocurrency prices fetched and stored successfully.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/CryptoCurrency"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error fetching cryptocurrency prices."
+          }
+        }
+      }
+    },
+    "/portfolio": {
+      "post": {
+        "summary": "Create a portfolio entry",
+        "description": "Creates a new portfolio entry for a user, including the cryptocurrency symbol, quantity, and purchase price.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PortfolioEntry"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Portfolio entry created successfully.",
+            "schema": {
+              "$ref": "#/definitions/PortfolioEntry"
+            }
+          },
+          "400": {
+            "description": "Bad request, possibly due to invalid data or an existing entry."
+          },
+          "500": {
+            "description": "Error creating portfolio entry."
+          }
+        }
+      },
+      "get": {
+        "summary": "Fetch portfolio",
+        "description": "Fetches the portfolio for a user by userId, including the current value of the holdings based on live cryptocurrency prices.",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the user whose portfolio is being fetched."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Portfolio fetched successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PortfolioEntryWithPrice"
+              }
+            }
+          },
+          "400": {
+            "description": "User ID is required."
+          },
+          "404": {
+            "description": "No portfolio entries found for the given user."
+          },
+          "500": {
+            "description": "Error fetching portfolio."
+          }
+        }
+      }
+    },
+    "/portfolio/{id}": {
+      "put": {
+        "summary": "Update portfolio entry",
+        "description": "Updates an existing portfolio entry by modifying the quantity or purchase price of a cryptocurrency in the user's portfolio.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the portfolio entry to be updated."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PortfolioEntry"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Portfolio entry updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/PortfolioEntry"
+            }
+          },
+          "400": {
+            "description": "Invalid data provided."
+          },
+          "404": {
+            "description": "Portfolio entry not found."
+          },
+          "500": {
+            "description": "Error updating portfolio entry."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete portfolio entry",
+        "description": "Deletes a portfolio entry by its ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the portfolio entry to be deleted."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Portfolio entry deleted successfully."
+          },
+          "404": {
+            "description": "Portfolio entry not found."
+          },
+          "500": {
+            "description": "Error deleting portfolio entry."
+          }
+        }
+      }
+    },
+    "/portfolio/insights": {
+      "get": {
+        "summary": "Get portfolio insights",
+        "description": "Retrieves insights about the user's portfolio, including the total value and 24-hour percentage growth for each cryptocurrency.",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the user whose portfolio insights are being retrieved."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Portfolio insights retrieved successfully.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "totalValue": {
+                  "type": "number"
+                },
+                "insights": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/PortfolioEntryWithInsights"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User ID is required."
+          },
+          "404": {
+            "description": "No portfolio entries found for the given user."
+          },
+          "500": {
+            "description": "Error fetching portfolio insights."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CryptoCurrency": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        },
+        "market_cap": {
+          "type": "number"
+        }
+      }
+    },
+    "PortfolioEntry": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "number"
+        },
+        "purchasePrice": {
+          "type": "number"
+        }
+      }
+    },
+    "PortfolioEntryWithPrice": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "number"
+        },
+        "purchasePrice": {
+          "type": "number"
+        },
+        "currentPrice": {
+          "type": "number"
+        },
+        "totalValue": {
+          "type": "number"
+        }
+      }
+    },
+    "PortfolioEntryWithInsights": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "number"
+        },
+        "purchasePrice": {
+          "type": "number"
+        },
+        "currentPrice": {
+          "type": "number"
+        },
+        "totalValue": {
+          "type": "number"
+        },
+        "percentageChange": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}
