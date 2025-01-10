@@ -119,7 +119,18 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PortfolioEntry"
+              "type": "object",
+              "properties": {
+                "quantity": {
+                  "type": "number",
+                  "description": "New quantity of the cryptocurrency"
+                },
+                "purchasePrice": {
+                  "type": "number",
+                  "description": "New purchase price of the cryptocurrency"
+                }
+              },
+              "additionalProperties": false
             }
           }
         ],
