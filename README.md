@@ -36,12 +36,18 @@ Build the Docker image and run the container using the following commands:
 docker-compose up --build
 ```
 
+##Deployed Api
+```
+http://35.92.155.164:3000/api-docs/
+```
 ## Testing the API
 
 ### Swagger Documentation
 The API is documented using Swagger. Once the application is running, visit:
 ```
-http://localhost:3000/api-docs
+http://localhost:3000/api-docs 
+http://35.92.155.164:3000/api-docs  //Deployed Api
+
 ```
 
 ### Endpoints
