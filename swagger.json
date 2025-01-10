@@ -5,7 +5,7 @@
     "title": "Cryptocurrency Tracker API",
     "description": "API documentation for the cryptocurrency tracker, including portfolio management and real-time cryptocurrency data."
   },
-  "host": "localhost:3000",
+  "host": "http://35.92.155.164:3000",
   "basePath": "/api",
   "schemes": [
     "http"

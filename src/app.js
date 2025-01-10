@@ -16,7 +16,6 @@ app.use(express.json());
 app.use("/api", router);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-
 // Database Connection
 mongoose.connect(process.env.MONGO_URI, {
   useUnifiedTopology: true,
