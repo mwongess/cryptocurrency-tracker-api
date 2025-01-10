@@ -19,20 +19,20 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       
       - name: Build Docker image
-        run: docker build -t cryptocurrency-tracker-api .
+        run: docker build -t mwongess/cryptocurrency-tracker-api .
       
       - name: Publish image to Docker Hub
-        run: docker push cryptocurrency-tracker-api:latest
+        run: docker push mwongess/cryptocurrency-tracker-api:latest
         
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Pull image from Docker Hub
-        run: docker pull cryptocurrency-tracker-api:latest
+        run: docker pull mwongess/cryptocurrency-tracker-api:latest
       
       - name: Delete old container (if exists)
         run: docker rm -f nodejs-app-container || true
       
       - name: Run Docker container
-        run: docker run -d -p 3000:3000 --name nodejs-app-container cryptocurrency-tracker-api
+        run: docker run -d -p 3000:3000 --name nodejs-app-container mwongess/cryptocurrency-tracker-api
