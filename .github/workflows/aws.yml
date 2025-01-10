@@ -30,9 +30,8 @@ jobs:
     steps:
       - name: Pull image from Docker Hub
         run: docker pull mwongess/cryptocurrency-tracker-app:latest
-      
-      - name: Delete old container (if exists)
-        run: docker rm -f nodejs-app-container || true
-      
-      - name: Run Docker container
-        run: docker run -d -p 3000:3000 --name nodejs-app-container mwongess/cryptocurrency-tracker-app
+        
+      - name: Run Docker Compose
+        run: |
+          docker-compose down
+          docker-compose up -d
