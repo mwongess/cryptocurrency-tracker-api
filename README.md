@@ -14,21 +14,13 @@ The Cryptocurrency Tracker API allows users to fetch real-time cryptocurrency da
 git clone https://github.com/mwongess/cryptocurrency-tracker-api.git
 cd cryptocurrency-tracker-api
 ```
-
-### 2. Install Dependencies
-```bash
-npm install
-```
-
-### 3. Set Up Environment Variables
+### 2. Set Up Environment Variables
 Create a `.env` file in the root directory and populate it with the following:
 ```env
 MONGO_URI=mongodb://localhost:27017/crypto_tracker
 PORT=3000
 API_KEY=<your-coinmarketcap-api-key>
 ```
-
-
 ### 3. Build and Run the Docker Container
 Build the Docker image and run the container using the following commands:
 
@@ -36,7 +28,7 @@ Build the Docker image and run the container using the following commands:
 docker compose up --build
 ```
 
-##3 Deployed Api
+## 4. Deployed Api
 ```
 http://35.92.155.164:3000/api-docs/
 ```
