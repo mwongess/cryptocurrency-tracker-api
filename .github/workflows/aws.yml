@@ -35,5 +35,5 @@ jobs:
         run: docker rm -f nodejs-app-container || true
       
       - name: Run Docker container
-        run: docker run --env-file ./.env -d -p 3000:3000 --name nodejs-app-container mwongess/cryptocurrency-tracker-app
+        run: docker run --env-file /home/ubuntu/actions-runner/.env -d -p 3000:3000 --name nodejs-app-container mwongess/cryptocurrency-tracker-app
         
