@@ -33,7 +33,7 @@ API_KEY=<your-coinmarketcap-api-key>
 Build the Docker image and run the container using the following commands:
 
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
 ##3 Deployed Api
