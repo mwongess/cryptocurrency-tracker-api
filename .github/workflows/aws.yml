@@ -29,7 +29,11 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
-      
+        
+      - name: Copy .env file
+        run: |
+          cp /home/ubuntu/actions-runner/.env ./.env
+
       - name: Pull Docker images
         run: docker compose pull
       
