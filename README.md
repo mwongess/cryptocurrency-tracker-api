@@ -17,9 +17,8 @@ cd cryptocurrency-tracker-api
 ### 2. Set Up Environment Variables
 Create a `.env` file in the root directory and populate it with the following:
 ```env
-MONGO_URI=mongodb://localhost:27017/crypto_tracker
-PORT=3000
 API_KEY=<your-coinmarketcap-api-key>
+PORT=3000
 ```
 ### 3. Build and Run the Docker Container
 Build the Docker image and run the container using the following commands:
