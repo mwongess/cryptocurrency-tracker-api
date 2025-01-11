@@ -17,8 +17,9 @@ cd cryptocurrency-tracker-api
 ### 2. Set Up Environment Variables
 Create a `.env` file in the root directory and populate it with the following:
 ```env
-API_KEY=<your-coinmarketcap-api-key>
+HOST=http://localhost
 PORT=3000
+API_KEY=
 ```
 ### 3. Build and Run the Docker Container
 Build the Docker image and run the container using the following commands:
