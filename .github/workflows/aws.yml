@@ -3,7 +3,7 @@ name: Deploy Node.js App to EC2 Instance
 on:
   push:
     branches:
-      - ec2  
+      - main  
 
 jobs:
   build:
@@ -29,7 +29,7 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
-        
+
       - name: Copy .env file
         run: |
           cp /home/ubuntu/actions-runner/.env ./.env
