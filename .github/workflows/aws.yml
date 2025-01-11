@@ -3,7 +3,7 @@ name: Deploy Node.js App to EC2 Instance
 on:
   push:
     branches:
-      - ec2  
+      - main  
 
 jobs:
   build:
@@ -20,8 +20,8 @@ jobs:
       
       - name: Build and push Docker images
         run: |
-          docker-compose build
-          docker-compose push
+          docker compose build
+          docker compose push
       
   deploy:
     needs: build
@@ -29,12 +29,16 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
-      
+
+      - name: Copy .env file
+        run: |
+          cp /home/ubuntu/actions-runner/.env ./.env
+
       - name: Pull Docker images
-        run: docker-compose pull
+        run: docker compose pull
       
       - name: Stop and remove old containers
-        run: docker-compose down
+        run: docker compose down
       
       - name: Start services with Docker Compose
-        run: docker-compose up -d
+        run: docker compose up -d 
