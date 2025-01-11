@@ -17,9 +17,7 @@ app.use("/api", router);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Database Connection
-mongoose.connect(process.env.MONGO_URI, {
-  useUnifiedTopology: true,
-});
+mongoose.connect(process.env.MONGO_URI);
 
 mongoose.connection.on("connected", () => {
   console.log("Connected to MongoDB");
@@ -30,5 +28,5 @@ mongoose.connection.on("error", (err) => {
 
 // Start Server
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on ${process.env.HOST +":"+ PORT}`);
 });
