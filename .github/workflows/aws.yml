@@ -37,4 +37,4 @@ jobs:
         run: docker compose down
       
       - name: Start services with Docker Compose
-        run: docker compose up -d --env-file /home/ubuntu/actions-runner/.env
+        run: docker compose up -d 
