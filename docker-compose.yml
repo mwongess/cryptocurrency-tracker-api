@@ -3,8 +3,6 @@ services:
     build: .
     ports:
       - "3000:3000"
-    env_file:
-      - ./.env
     environment:
       - MONGO_URI=mongodb://db:27017/crypto-tracker
     depends_on:
