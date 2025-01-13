@@ -20,8 +20,8 @@ jobs:
       
       - name: Build and push Docker images
         run: |
-          docker compose build
-          docker tag cryptocurrency-tracker-app  mwongess/cryptocurrency-tracker-api:latest
+          docker compose build app
+          docker tag mwongess/cryptocurrency-tracker-api:latest mwongess/cryptocurrency-tracker-api:latest
           docker push mwongess/cryptocurrency-tracker-api:latest
       
   deploy:
