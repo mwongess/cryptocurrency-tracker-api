@@ -20,9 +20,8 @@ jobs:
       
       - name: Build and push Docker images
         run: |
-          docker compose build app
-          docker tag mwongess/cryptocurrency-tracker-api:latest mwongess/cryptocurrency-tracker-api:latest
-          docker push mwongess/cryptocurrency-tracker-api:latest
+         docker build -t mwongess/cryptocurrency-tracker-api:latest .
+         docker push mwongess/cryptocurrency-tracker-api:latest
       
   deploy:
     needs: build
@@ -36,7 +35,7 @@ jobs:
           cp /home/ubuntu/actions-runner/.env ./.env
 
       - name: Pull Docker images
-        run: docker compose pull mwongess/cryptocurrency-tracker-api:latest
+        run: docker pull mwongess/cryptocurrency-tracker-api:latest
       
       - name: Stop and remove old containers
         run: docker compose down
