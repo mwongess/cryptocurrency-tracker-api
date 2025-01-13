@@ -7,7 +7,7 @@ services:
       - MONGO_URI=mongodb://db:27017/crypto-tracker
     depends_on:
       - db
-    container_name: cryptocurrency-tracker-api
+    container_name: mwongess/cryptocurrency-tracker-api
 
   db:
     image: mongo
