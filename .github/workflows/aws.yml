@@ -22,7 +22,7 @@ jobs:
         run: |
           docker compose build
           docker tag cryptocurrency-tracker-app  mwongess/cryptocurrency-tracker-api:latest
-          docker push mwongess/cryptocurrency-tracker-api
+          docker push mwongess/cryptocurrency-tracker-api:latest
       
   deploy:
     needs: build
